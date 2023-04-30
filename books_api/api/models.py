@@ -1,5 +1,6 @@
+from django.contrib.auth.base_user import AbstractBaseUser
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+
 
 
 class Author(AbstractBaseUser):
@@ -17,7 +18,7 @@ class Author(AbstractBaseUser):
 class Book(models.Model):
     """Модель книги"""
     title = models.CharField(max_length=200, verbose_name="Название книги")
-    author = models.ForeignKey(Author, on_delete=models.CASCADE, verbose_name="Автор книги")
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, verbose_name="Автор книги", related_name='books')
     description = models.TextField(verbose_name="Описание книги")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания записи")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата обновления записи")
