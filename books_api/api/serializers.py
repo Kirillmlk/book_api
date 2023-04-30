@@ -9,8 +9,10 @@ class AuthorSerializer(serializers.ModelSerializer):
 
 
 class BookSerializer(serializers.ModelSerializer):
-    author = AuthorSerializer()
-
     class Meta:
-        model = Book
-        fields = ['id', 'title', 'author', 'description', 'publication_date']
+       model = Book
+       fields = '__all__'
+
+    def create(self, validated_data):
+        validated_data['author'] = self.context['request'].user.author
+        return super().create(validated_data)
