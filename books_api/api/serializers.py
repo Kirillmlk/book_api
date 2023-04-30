@@ -11,11 +11,7 @@ class AuthorSerializer(serializers.ModelSerializer):
 class BookSerializer(serializers.ModelSerializer):
     class Meta:
        model = Book
-       fields = ['title', 'author', 'description', 'created_at', 'updated_at']
-       extra_kwargs = {
-           'author': {'read_only': True},
-       }
-       author = AuthorSerializer()
+       fields = '__all__'
 
     def create(self, validated_data):
         validated_data['author'] = self.context['request'].user.author

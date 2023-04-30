@@ -1,6 +1,2 @@
 .idea
 venv
-.env
-requirements.txt
-db.sqlite3
-pycache
